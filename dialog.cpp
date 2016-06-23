@@ -12,6 +12,7 @@ Dialog::Dialog(QWidget *parent) :
     ui(new Ui::Dialog)
 {
     ui->setupUi(this);
+    setWindowFlags(windowFlags() ^ Qt::WindowContextHelpButtonHint);
     ui->processOutput->setReadOnly(true);
     ui->processOutput->setPlaceholderText("Version " GIT_VERSION ". Ready.");
 
