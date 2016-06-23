@@ -5,7 +5,7 @@ project(qtshot)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 include(GetGitRevisionDescription)
-git_describe(GIT_VERSION --always)
+git_describe(GIT_VERSION --always --dirty)
 configure_file(git_version.h.in git_version.h)
 
 # Find includes in corresponding build directories

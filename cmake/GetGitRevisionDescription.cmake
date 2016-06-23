@@ -89,10 +89,6 @@ function(git_describe _var)
 		set(${_var} "GIT-NOTFOUND" PARENT_SCOPE)
 		return()
 	endif()
-	if(NOT hash)
-		set(${_var} "HEAD-HASH-NOTFOUND" PARENT_SCOPE)
-		return()
-	endif()
 
 	# TODO sanitize
 	#if((${ARGN}" MATCHES "&&") OR
@@ -107,7 +103,6 @@ function(git_describe _var)
 	execute_process(COMMAND
 		"${GIT_EXECUTABLE}"
 		describe
-		${hash}
 		${ARGN}
 		WORKING_DIRECTORY
 		"${CMAKE_CURRENT_SOURCE_DIR}"
