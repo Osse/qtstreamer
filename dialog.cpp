@@ -1,5 +1,6 @@
 #include "dialog.h"
 #include "ui_dialog.h"
+#include "git_version.h"
 
 #include <QStringList>
 #include <QProcess>
@@ -12,6 +13,7 @@ Dialog::Dialog(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->processOutput->setReadOnly(true);
+    ui->processOutput->setPlaceholderText("Version " GIT_VERSION ". Ready.");
 
     if (QStandardPaths::findExecutable(program).isEmpty())
         ui->processOutput->appendPlainText(program + " not found.");
