@@ -19,14 +19,18 @@ public:
     ~Dialog();
 
 private slots:
-    void startLivestreamer();
+    void startLivestreamer(const QString& text);
     void handleFinished(int exitCode);
     void appendOutput();
 
 private:
+    void readCache();
+    void writeCache();
+
     Ui::Dialog* ui;
     QProcess* process;
     QString program{"livestreamer"};
+    QString cacheFile;
 };
 
 #endif // DIALOG_H
