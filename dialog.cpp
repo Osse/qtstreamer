@@ -42,7 +42,8 @@ void Dialog::startLivestreamer(const QString& text)
 
     process = new QProcess(this);
     connect(process, SIGNAL(finished(int)), this, SLOT(handleFinished(int)));
-    connect(process, &QProcess::readyRead, this, &Dialog::appendOutput);
+    connect(process, &QProcess::readyReadStandardOutput, this, &Dialog::appendOutput);
+    connect(process, &QProcess::readyReadStandardError, this, &Dialog::appendError);
     process->start(program, arguments);
 }
 
@@ -56,10 +57,18 @@ void Dialog::handleFinished(int exitCode)
 
 void Dialog::appendOutput()
 {
+    QString str(process->readAllStandardOutput());
+    ui->processOutput->appendHtml(str.trimmed());
+}
+
+void Dialog::appendError()
+{
     char buf[1024] = { 0 };
+    process->setReadChannel(QProcess::StandardError);
     process->readLine(buf, 1024);
     QString str(buf);
-    ui->processOutput->appendPlainText(str.trimmed());
+    str = "<font color=red>" + str + "</font>";
+    ui->processOutput->appendHtml(str.trimmed());
 }
 
 void Dialog::readCache()

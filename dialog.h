@@ -22,6 +22,7 @@ private slots:
     void startLivestreamer(const QString& text);
     void handleFinished(int exitCode);
     void appendOutput();
+    void appendError();
 
 private:
     void readCache();
