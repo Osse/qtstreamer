@@ -23,6 +23,7 @@ private slots:
     void handleFinished(int exitCode);
     void appendOutput();
     void appendError();
+    void editList();
 
 private:
     void fillList();

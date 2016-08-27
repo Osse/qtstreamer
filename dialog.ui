@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>261</width>
+    <width>372</width>
     <height>136</height>
    </rect>
   </property>
@@ -33,6 +33,16 @@
        </property>
        <property name="editable">
         <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pbEditCache">
+       <property name="text">
+        <string>Edit list</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
        </property>
       </widget>
      </item>

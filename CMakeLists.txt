@@ -21,7 +21,7 @@ set(CMAKE_CXX_STANDARD 14)
 find_package(Qt5Widgets)
 
 # Tell CMake to create the qtshot executable
-set(SOURCES main.cpp dialog.cpp dialog.ui)
+set(SOURCES main.cpp dialog.cpp dialog.ui editor.cpp editor.ui)
 add_executable(qtstreamer WIN32 ${SOURCES})
 
 # Use the Widgets module from Qt 5.

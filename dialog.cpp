@@ -2,6 +2,8 @@
 #include "ui_dialog.h"
 #include "git_version.h"
 
+#include "editor.h"
+
 #include <QStringList>
 #include <QProcess>
 #include <QStandardPaths>
@@ -27,6 +29,8 @@ Dialog::Dialog(QWidget *parent) :
 
     streamList = readCacheFile();
     fillList();
+
+    connect(ui->pbEditCache, &QPushButton::clicked, this, &Dialog::editList);
 }
 
 Dialog::~Dialog()
@@ -72,7 +76,19 @@ void Dialog::appendError()
     ui->processOutput->appendHtml(str.trimmed());
 }
 
-void Dialog::readCache()
+void Dialog::editList()
+{
+    auto editor = new Editor(streamList);
+    editor->setAttribute(Qt::WA_DeleteOnClose);
+    editor->show();
+
+    connect(editor, &Editor::reload, this, [&](QStringList list) {
+        streamList = list;
+        fillList();
+    });
+}
+
+QStringList Dialog::readCacheFile()
 {
     auto cacheLocation = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 
