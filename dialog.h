@@ -25,13 +25,15 @@ private slots:
     void appendError();
 
 private:
-    void readCache();
+    void fillList();
+    QStringList readCacheFile();
     void writeCache();
 
     Ui::Dialog* ui;
     QProcess* process;
     QString program{"livestreamer"};
     QString cacheFile;
+    QStringList streamList;
 };
 
 #endif // DIALOG_H

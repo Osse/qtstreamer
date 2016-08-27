@@ -25,7 +25,8 @@ Dialog::Dialog(QWidget *parent) :
         connect(ui->streamComboBox, static_cast<void(QComboBox::*)(const QString &)>(&QComboBox::activated),
                 this, &Dialog::startLivestreamer);
 
-    readCache();
+    streamList = readCacheFile();
+    fillList();
 }
 
 Dialog::~Dialog()
@@ -85,10 +86,16 @@ void Dialog::readCache()
     {
         cache.open(QIODevice::ReadOnly | QIODevice::Text);
         QTextStream textStream(&cache);
-        ui->streamComboBox->addItems(textStream.readAll().split("\n", QString::SkipEmptyParts));
+        return textStream.readAll().split("\n", QString::SkipEmptyParts);
     }
 }
 
+void Dialog::fillList()
+{
+    ui->streamComboBox->clear();
+    ui->streamComboBox->addItems(streamList);
+
+}
 void Dialog::writeCache()
 {
     QFile cache(cacheFile);
