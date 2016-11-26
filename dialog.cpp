@@ -80,12 +80,13 @@ void Dialog::editList()
 {
     auto editor = new Editor(streams);
     editor->setAttribute(Qt::WA_DeleteOnClose);
-    editor->show();
 
     connect(editor, &Editor::reload, this, [&](QStringList list) {
         streams = list;
         fillStreams();
     });
+
+    editor->exec();
 }
 
 QStringList Dialog::readCacheFile()
