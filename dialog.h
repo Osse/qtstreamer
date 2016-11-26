@@ -26,7 +26,7 @@ private slots:
     void editList();
 
 private:
-    void fillList();
+    void fillStreams();
     QStringList readCacheFile();
     void writeCache();
 
@@ -34,7 +34,7 @@ private:
     QProcess* process;
     QString program{"livestreamer"};
     QString cacheFile;
-    QStringList streamList;
+    QStringList streams;
 };
 
 #endif // DIALOG_H

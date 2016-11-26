@@ -27,8 +27,8 @@ Dialog::Dialog(QWidget *parent) :
         connect(ui->streamComboBox, static_cast<void(QComboBox::*)(const QString &)>(&QComboBox::activated),
                 this, &Dialog::startLivestreamer);
 
-    streamList = readCacheFile();
-    fillList();
+    streams = readCacheFile();
+    fillStreams();
 
     connect(ui->pbEditCache, &QPushButton::clicked, this, &Dialog::editList);
 }
@@ -78,13 +78,13 @@ void Dialog::appendError()
 
 void Dialog::editList()
 {
-    auto editor = new Editor(streamList);
+    auto editor = new Editor(streams);
     editor->setAttribute(Qt::WA_DeleteOnClose);
     editor->show();
 
     connect(editor, &Editor::reload, this, [&](QStringList list) {
-        streamList = list;
-        fillList();
+        streams = list;
+        fillStreams();
     });
 }
 
@@ -106,12 +106,12 @@ QStringList Dialog::readCacheFile()
     }
 }
 
-void Dialog::fillList()
+void Dialog::fillStreams()
 {
     ui->streamComboBox->clear();
-    ui->streamComboBox->addItems(streamList);
-
+    ui->streamComboBox->addItems(streams);
 }
+
 void Dialog::writeCache()
 {
     QFile cache(cacheFile);
