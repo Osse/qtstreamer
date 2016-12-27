@@ -25,7 +25,7 @@ Dialog::Dialog(QWidget *parent) :
         ui->processOutput->appendPlainText(program + " not found.");
     else
         connect(ui->streamComboBox, static_cast<void(QComboBox::*)(const QString &)>(&QComboBox::activated),
-                this, &Dialog::startLivestreamer);
+                this, &Dialog::startStreamlink);
 
     fillStreams(readCacheFile());
 
@@ -38,7 +38,7 @@ Dialog::~Dialog()
     delete ui;
 }
 
-void Dialog::startLivestreamer(const QString& text)
+void Dialog::startStreamlink(const QString& text)
 {
     ui->streamComboBox->blockSignals(true);
     ui->processOutput->clear();

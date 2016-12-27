@@ -19,7 +19,7 @@ public:
     ~Dialog();
 
 private slots:
-    void startLivestreamer(const QString& text);
+    void startStreamlink(const QString& text);
     void handleFinished(int exitCode);
     void appendOutput();
     void appendError();
@@ -32,7 +32,7 @@ private:
 
     Ui::Dialog* ui;
     QProcess* process;
-    QString program{"livestreamer"};
+    QString program{"streamlink"};
     QString cacheFile;
     QStringList streams;
 };
